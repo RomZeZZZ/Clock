@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS + CSS Clock</title>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="clock-face">
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand second-hand"></div>
+        </div>
+    </div>
+
+    <style>
+        html {
+            background:url(https://picsum.photos/id/237/200/300);
+            background-repeat: repeat;
+            font-family: 'helvetica neue';
+            text-align: center;
+            font-size: 10px;
+        }
+
+        body {
+            margin: 0;
+            font-size: 2rem;
+            display: flex;
+            flex: 1;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        .clock {
+            width: 30rem;
+            height: 30rem;
+            border: 20px solid white;
+            border-radius: 50%;
+            margin: 50px auto;
+            position: relative;
+            padding: 2rem;
+            box-shadow:
+                0 0 0 4px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 3px white,
+                inset 0 0 10px black,
+                0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .clock-face {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform: translateY(-3px);
+        }
+
+        .hand {
+            width: 50%;
+            height: 2px;
+            background: rgb(235, 231, 231);
+            position: absolute;
+            top: 50%;
+            transform-origin: 100%;
+            transform: rotate(45deg);
+          
+        }
+
+    </style>
+
+    <script>
+        var second_hand = document.querySelectorAll('.second-hand'),
+            min_hand = document.querySelectorAll('.min-hand'),
+            hour_hand = document.querySelectorAll('.hour-hand'),
+           
+            date = new Date();
+            min_calc = date.getMinutes(),
+            hour_calc = date.getHours(),
+            second_calc = date.getSeconds();
+           
+            console.log(date.getHours()); 
+            console.log(date.getMinutes()); 
+            console.log(date.getSeconds()); 
+
+            console.log(min_calc); 
+            console.log(hour_calc); 
+            console.log(second_calc); 
+
+            second_hand[0].style.transform = `rotate(${90 + second_calc*6}deg)`;
+            min_hand[0].style.transform = `rotate(${90 + min_calc*6}deg)`;
+            hour_hand[0].style.transform = `rotate(${90 + hour_calc*6}deg)`;
+            
+
+           
+           setInterval(() => {
+                if (second_calc > 380) {
+                // second_calc = 0;
+                }
+                //console.log(second_calc);
+                second_calc += 6;
+                second_hand[0].style.transform = `rotate(${91 + second_calc}deg)`;
+            }, 1000);
+
+        setInterval(() => {
+            if (min_calc > 380) {
+               // min_calc = 0;
+            }
+            //console.log(min_calc);
+            min_calc += 1;
+            min_hand[0].style.transform = `rotate(${91 + min_calc}deg)`;
+        }, 10000);
+
+        setInterval(() => {
+            if (hour_calc > 360) {
+               // hour_calc = 0;
+            }
+            console.log(hour_calc);
+            hour_calc += 6;
+            hour_hand[0].style.transform = `rotate(${96 + hour_calc}deg)`;
+        }, 60000);
+
+
+   
+
+    </script>
+</body>
+</html>
